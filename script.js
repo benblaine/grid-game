@@ -44,20 +44,27 @@ function fillLine(row, col, dx, dy) {
   const player = grid[row][col];
   let startRow = row, startCol = col, endRow = row, endCol = col;
 
-  // Check left/up
-  while (isValid(startRow - dx, startCol - dy) && grid[startRow - dx][startCol - dy] === player) {
+  // Move in the negative direction
+  while (
+    isValid(startRow - dx, startCol - dy) &&
+    grid[startRow - dx][startCol - dy] === player
+  ) {
     startRow -= dx;
     startCol -= dy;
   }
 
-  // Check right/down
-  while (isValid(endRow + dx, endCol + dy) && grid[endRow + dx][endCol + dy] === player) {
+  // Move in the positive direction
+  while (
+    isValid(endRow + dx, endCol + dy) &&
+    grid[endRow + dx][endCol + dy] === player
+  ) {
     endRow += dx;
     endCol += dy;
   }
 
-  // Fill in the empty spaces between start and end
+  // Fill empty spaces between start and end
   if (dx === 0) {
+    // Horizontal filling
     for (let c = startCol; c <= endCol; c++) {
       if (grid[row][c] === " ") {
         grid[row][c] = player;
@@ -66,6 +73,7 @@ function fillLine(row, col, dx, dy) {
       }
     }
   } else if (dy === 0) {
+    // Vertical filling
     for (let r = startRow; r <= endRow; r++) {
       if (grid[r][col] === " ") {
         grid[r][col] = player;
